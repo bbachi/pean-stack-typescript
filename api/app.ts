@@ -32,6 +32,7 @@ class App {
     private middleware(): void {
         this.express.use(bodyParser.json());
         this.express.use(bodyParser.urlencoded({ extended: false }));
+        this.express.use(express.static(path.join(__dirname, './ui/build')));
     }
 
     private routes(): void {
@@ -54,7 +55,7 @@ class App {
         });
 
         this.express.get("/", (req, res, next) => {
-            res.send("Typescript App works!!");
+            res.sendFile(path.join(__dirname, './ui/build/index.html'));
         });
 
         // swagger docs
